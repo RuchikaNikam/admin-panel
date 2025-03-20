@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h2>User List</h2>
+
+    <form action="/" method="GET">
+        <input type="text" name="search" value="<%= searchQuery %>" placeholder="Search user...">
+        <button type="submit">Search</button>
+    </form>
+
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+        </tr>
+        <% users.forEach(user => { %>
+            <tr>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td><%= user.role %></td>
+            </tr>
+        <% }) %>
+    </table>
+
+    <div>
+        <% if (currentPage > 1) { %>
+            <a href="/?page=<%= currentPage - 1 %>&search=<%= searchQuery %>">Previous</a>
+        <% } %>
+
+        Page <%= currentPage %> of <%= totalPages %>
+
+        <% if (currentPage < totalPages) { %>
+            <a href="/?page=<%= currentPage + 1 %>&search=<%= searchQuery %>">Next</a>
+        <% } %>
+    </div>
+</body>
+</html>
